@@ -1,0 +1,30 @@
+{
+  "name": "conFusion",
+  "version": "1.0.0",
+  "description": "Website for an awesome restaurant",
+  "main": "index.html",
+  "moduleType": [],
+  "keywords": [
+    "conFusion",
+    "Fusion",
+    "Restaurant"
+  ],
+  "authors": [
+    "L.P"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
+    "bootstrap-social": "^5.1.1",
+    "angular": "^1.6.4"
+  }
+}
