@@ -24,6 +24,7 @@ $ sudo npm install -g gulp
 
 ```bash
 $ bower install
+$ npm install
 $ grunt serve
 ```
 
@@ -31,6 +32,7 @@ or
 
 ```bash
 $ bower install
+$ npm install
 $ gulp watch
 ```
 
