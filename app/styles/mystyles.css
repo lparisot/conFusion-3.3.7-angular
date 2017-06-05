@@ -94,3 +94,5 @@ body {
   position: absolute;
   right: 0px;
 }
+
+.sort {width:120px; color:grey; display:inline-block; text-align:center}
