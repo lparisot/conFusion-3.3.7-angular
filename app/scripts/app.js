@@ -70,4 +70,45 @@ angular.module('confusionApp', [])
     $scope.toggleDetails = function() {
       $scope.showDetails = !$scope.showDetails;
     };
-}]);
+  }])
+
+  .controller('ContactController', ['$scope', function($scope) {
+    $scope.feedback = { mychannel:"", firstName:"", lastName:"", agree:false, email:"", tel:{areaCode:"", number:""}, comments:"" };
+    $scope.channels = [ {value:"tel", label:"Tel."}, {value:"Email", label:"Email"} ];
+    $scope.invalidChannelSelection = false;
+  }])
+
+  .controller('FeedbackController', ['$scope', function($scope) {
+    $scope.sendFeedback = function() {
+      console.log($scope.feedback);
+      if ($scope.feedback.agree && (!$scope.feedback.mychannel || $scope.feedback.mychannel === "")) {
+        $scope.invalidChannelSelection = true;
+      }
+      else {
+        $scope.invalidChannelSelection = false;
+        $scope.feedback.mychannel="";
+        $scope.feedback.firstName="";
+        $scope.feedback.lastName="";
+        $scope.feedback.agree=false;
+        $scope.feedback.email="";
+        $scope.feedback.tel.areaCode="";
+        $scope.feedback.tel.number="";
+        $scope.feedback.comments="";
+
+        $scope.$watch('feedbackForm', function(feedbackForm) {
+          if(feedbackForm) {
+            $scope.feedbackForm.$setPristine();
+          }
+        });
+      }
+    };
+
+    $scope.updateChannel = function() {
+      if ($scope.feedback.agree && (!$scope.feedback.mychannel || $scope.feedback.mychannel === "")) {
+        $scope.invalidChannelSelection = true;
+      }
+      else {
+        $scope.invalidChannelSelection = false;
+      }
+    };
+  }]);

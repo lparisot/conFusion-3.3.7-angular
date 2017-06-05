@@ -34,7 +34,7 @@ gulp.task('clean', function() {
 
 // minify CSS and uglify JS, need to check JS code before
 gulp.task('usemin', ['jshint'], function () {
-  return gulp.src('./app/menu.html')
+  return gulp.src('./app/contactus.html')
     .pipe(usemin({
       js: [ngannotate(), uglify(), rev()],
       css:[minifycss(), rev()]
@@ -73,7 +73,7 @@ gulp.task('watch', ['default'], function () {
   browserSync.init({
     server: {
        baseDir: "dist",
-       index: "menu.html"
+       index: "contactus.html"
     }
   });
 
