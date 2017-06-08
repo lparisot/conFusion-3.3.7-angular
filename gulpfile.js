@@ -34,7 +34,7 @@ gulp.task('clean', function() {
 
 // minify CSS and uglify JS, need to check JS code before
 gulp.task('usemin', ['jshint'], function () {
-  return gulp.src('./app/*.html')
+  return gulp.src('./app/**/*.html')
     .pipe(usemin({
       js: [ngannotate(), uglify(), rev()],
       css:[minifycss(), rev()]

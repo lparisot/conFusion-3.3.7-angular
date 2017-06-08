@@ -1,6 +1,10 @@
 'use strict';
 
 angular.module('confusionApp')
+  .controller('IndexController', ['$scope', function($scope) {
+    $scope.test = "";
+  }])
+
   .controller('MenuController', ['$scope', 'menuFactory', function($scope, menuFactory) {
     $scope.dishes = menuFactory.getDishes();
 
@@ -77,8 +81,8 @@ angular.module('confusionApp')
     };
   }])
 
-  .controller('DishDetailController', ['$scope', '$routeParams', 'menuFactory', function($scope, $routeParams, menuFactory) {
-    $scope.dish = menuFactory.getDish(parseInt($routeParams.id,10));
+  .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', function($scope, $stateParams, menuFactory) {
+    $scope.dish = menuFactory.getDish(parseInt($stateParams.id, 10));
   }])
 
   .controller('DishCommentController', ['$scope', function($scope) {
