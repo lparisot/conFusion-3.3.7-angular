@@ -1,10 +1,6 @@
 'use strict';
 
 angular.module('confusionApp')
-  .controller('IndexController', ['$scope', function($scope) {
-    $scope.test = "";
-  }])
-
   .controller('MenuController', ['$scope', 'menuFactory', function($scope, menuFactory) {
     $scope.dishes = menuFactory.getDishes();
 
@@ -107,6 +103,16 @@ angular.module('confusionApp')
         $scope.comment.author = "";
         $scope.comment.date = "";
     };
+  }])
+
+  .controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory', function($scope, menuFactory, corporateFactory) {
+    $scope.dish = menuFactory.getDish(0);
+    $scope.promotion = menuFactory.getPromotion(0);
+    $scope.leader = corporateFactory.getLeader(3);
+  }])
+
+  .controller('AboutController', ['$scope', 'corporateFactory', function($scope, corporateFactory) {
+    $scope.leaders = corporateFactory.getLeaders();
   }])
 
 ;
