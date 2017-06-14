@@ -20,6 +20,12 @@ $ sudo npm install -g grunt-cli
 $ sudo npm install -g gulp
 ```
 
+## Installing a little JSN server
+
+```bash
+$ sudo npm install -g json-server
+```
+
 ## Development Installation
 
 ```bash
@@ -34,6 +40,12 @@ or
 $ bower install
 $ npm install
 $ gulp watch
+```
+
+On an other command line, launch the JSON server:
+```bash
+$ cd json-server
+$ json-server --watch db.json
 ```
 
 
