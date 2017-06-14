@@ -20,7 +20,7 @@ $ sudo npm install -g grunt-cli
 $ sudo npm install -g gulp
 ```
 
-## Installing a little JSN server
+## Installing a little JSON server
 
 ```bash
 $ sudo npm install -g json-server
