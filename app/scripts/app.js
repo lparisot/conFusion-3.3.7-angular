@@ -1,7 +1,7 @@
 'use strict';
 
 
-angular.module('confusionApp', ['ui.router'])
+angular.module('confusionApp', ['ui.router', 'ngResource'])
   .config(['$locationProvider', function($locationProvider) {
     $locationProvider.hashPrefix('');
   }])

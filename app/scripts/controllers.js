@@ -6,16 +6,14 @@ angular.module('confusionApp')
     $scope.message = "Loading ...";
 
     $scope.dishes = [];
-    menuFactory.getDishes()
-      .then(
-        function success(response) {
-          $scope.dishes = response.data;
-          $scope.showMenu = true;
-        },
-        function error(response) {
-          $scope.message = "Error: " + response.status + " " + response.statusText;
-        }
-      );
+    menuFactory.getDishes().query(
+      function(response) {
+        $scope.dishes = response;
+        $scope.showMenu = true;
+      },
+      function(response) {
+        $scope.message = "Error: " + response.status + " " + response.statusText;
+      });
 
     // menus filter
     $scope.filterText = '';
@@ -95,35 +93,29 @@ angular.module('confusionApp')
     $scope.message="Loading ...";
 
     $scope.dish = {};
-    menuFactory.getDish(parseInt($stateParams.id, 10))
-      .then(
-        function success(response) {
-          $scope.dish = response.data;
+    menuFactory.getDishes().get({id:parseInt($stateParams.id, 10)})
+      .$promise.then(
+        function(response) {
+          $scope.dish = response;
           $scope.showDish = true;
         },
-        function error(response) {
-          $scope.message = "Error:" + response.status + " " + response.statusText;
-        }
-      );
+        function(response) {
+          $scope.message = "Error: " + response.status + " " + response.statusText;
+        });
   }])
 
-  .controller('DishCommentController', ['$scope', function($scope) {
-
-    //Step 1: Create a JavaScript object to hold the comment from the form
+  .controller('DishCommentController', ['$scope', 'menuFactory', function($scope, menuFactory) {
     $scope.comment = {rating:5, comment:"", author:"", date:""};
     $scope.ratings = [1, 2, 3, 4, 5];
 
     $scope.submitComment = function () {
-        //Step 2: This is how you record the date
         $scope.comment.date = new Date().toISOString();
 
-        // Step 3: Push your comment into the dish's comment array
         $scope.dish.comments.push(angular.copy($scope.comment));
+        menuFactory.getDishes().update({id:$scope.dish.id}, $scope.dish);
 
-        //Step 4: reset your form to pristine
         $scope.commentForm.$setPristine();
 
-        //Step 5: reset your JavaScript object that holds your comment
         $scope.comment.rating = 5;
         $scope.comment.comment = "";
         $scope.comment.author = "";
@@ -137,27 +129,25 @@ angular.module('confusionApp')
     $scope.message="Loading ...";
 
     $scope.dish = {};
-    menuFactory.getDish(0)
-      .then(
-        function success(response) {
-          $scope.dish = response.data;
+    menuFactory.getDishes().get({id:0})
+      .$promise.then(
+        function(response) {
+          $scope.dish = response;
           $scope.showDish = true;
         },
-        function error(response) {
-          $scope.message = "Error:" + response.status + " " + response.statusText;
-        }
-      )
+        function(response) {
+          $scope.message = "Error: " + response.status + " " + response.statusText;
+        });
     $scope.promotion = {};
-    menuFactory.getPromotion(0)
-      .then(
-        function success(response) {
-          $scope.promotion = response.data;
+    menuFactory.getPromotions().get({id:0})
+      .$promise.then(
+        function(response) {
+          $scope.promotion = response;
           $scope.showPromotion = true;
         },
-        function error(response) {
-          $scope.message = "Error:" + response.status + " " + response.statusText;
-        }
-      );
+        function(response) {
+          $scope.message = "Error: " + response.status + " " + response.statusText;
+        });
     $scope.leader = corporateFactory.getLeader(3);
   }])
 
