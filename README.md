@@ -48,6 +48,14 @@ $ cd json-server
 $ json-server --watch db.json
 ```
 
+## Tests
+
+Tests are done using Karma, Jasmine and Angular-mock.
+We are using Phantom and Chrome browsers.
+
+```bash
+$ karma start test/karma.conf.js
+```
 
 **Other Grunt commands**
 
