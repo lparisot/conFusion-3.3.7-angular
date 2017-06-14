@@ -2,7 +2,20 @@
 
 angular.module('confusionApp')
   .controller('MenuController', ['$scope', 'menuFactory', function($scope, menuFactory) {
-    $scope.dishes = menuFactory.getDishes();
+    $scope.showMenu = false;
+    $scope.message = "Loading ...";
+
+    $scope.dishes = [];
+    menuFactory.getDishes()
+      .then(
+        function success(response) {
+          $scope.dishes = response.data;
+          $scope.showMenu = true;
+        },
+        function error(response) {
+          $scope.message = "Error: " + response.status + " " + response.statusText;
+        }
+      );
 
     // menus filter
     $scope.filterText = '';
@@ -78,7 +91,20 @@ angular.module('confusionApp')
   }])
 
   .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', function($scope, $stateParams, menuFactory) {
-    $scope.dish = menuFactory.getDish(parseInt($stateParams.id, 10));
+    $scope.showDish = false;
+    $scope.message="Loading ...";
+
+    $scope.dish = {};
+    menuFactory.getDish(parseInt($stateParams.id, 10))
+      .then(
+        function success(response) {
+          $scope.dish = response.data;
+          $scope.showDish = true;
+        },
+        function error(response) {
+          $scope.message = "Error:" + response.status + " " + response.statusText;
+        }
+      );
   }])
 
   .controller('DishCommentController', ['$scope', function($scope) {
@@ -106,8 +132,32 @@ angular.module('confusionApp')
   }])
 
   .controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory', function($scope, menuFactory, corporateFactory) {
-    $scope.dish = menuFactory.getDish(0);
-    $scope.promotion = menuFactory.getPromotion(0);
+    $scope.showDish = false;
+    $scope.showPromotion = false;
+    $scope.message="Loading ...";
+
+    $scope.dish = {};
+    menuFactory.getDish(0)
+      .then(
+        function success(response) {
+          $scope.dish = response.data;
+          $scope.showDish = true;
+        },
+        function error(response) {
+          $scope.message = "Error:" + response.status + " " + response.statusText;
+        }
+      )
+    $scope.promotion = {};
+    menuFactory.getPromotion(0)
+      .then(
+        function success(response) {
+          $scope.promotion = response.data;
+          $scope.showPromotion = true;
+        },
+        function error(response) {
+          $scope.message = "Error:" + response.status + " " + response.statusText;
+        }
+      );
     $scope.leader = corporateFactory.getLeader(3);
   }])
 
