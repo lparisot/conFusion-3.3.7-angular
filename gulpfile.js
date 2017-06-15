@@ -13,7 +13,9 @@ var gulp = require('gulp'),
     rev = require('gulp-rev'),
     ngannotate = require('gulp-ng-annotate'),
     browserSync = require('browser-sync'),
-    del = require('del');
+    del = require('del'),
+    karma = require('karma');
+
 
 // Default task
 gulp.task('default', ['clean'], function() {

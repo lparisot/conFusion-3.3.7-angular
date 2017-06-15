@@ -26,6 +26,13 @@ $ sudo npm install -g gulp
 $ sudo npm install -g json-server
 ```
 
+## Installing Protractor
+
+```bash
+$ sudo npm install -g protractor
+$ sudo webdriver-manager update
+```
+
 ## Development Installation
 
 ```bash
@@ -48,13 +55,33 @@ $ cd json-server
 $ json-server --watch db.json
 ```
 
-## Tests
+## Unit tests
 
 Tests are done using Karma, Jasmine and Angular-mock.
 We are using Phantom and Chrome browsers.
 
 ```bash
 $ karma start test/karma.conf.js
+```
+
+## End-to-End tests
+
+Tests are done using Protractor and Jasmine.
+
+You need to launched the json-server:
+```bash
+$ cd json-server
+$ json-server --watch db.json
+```
+
+Then to launch the application:
+```bash
+$ gulp watch
+```
+
+Protractor will interact directly with a Chrome browser to execute the tests:
+```bash
+$ protractor test/protractor.conf.js
 ```
 
 **Other Grunt commands**
