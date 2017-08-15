@@ -1,5 +1,5 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-  <div class="container" ng-controller="HeaderController">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -11,29 +11,41 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li ng-class="{active: isActive('app')}">
+        <li ng-class="{active: stateis('app')}">
           <a ui-sref="app">
             <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
             Home
           </a>
         </li>
-        <li ng-class="{active: isActive('app.aboutus')}">
+        <li ng-class="{active: stateis('app.aboutus')}">
           <a ui-sref="app.aboutus">
             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
             About
           </a>
         </li>
-        <li ng-class="{active: isActive('app.menu')}">
+        <li ng-class="{active: stateis('app.menu')}">
           <a ui-sref="app.menu">
             <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
             Menu
           </a>
         </li>
-        <li ng-class="{active: isActive('app.contactus')}">
+        <li ng-class="{active: stateis('app.contactus')}">
           <a ui-sref="app.contactus">
             <i class="fa fa-envelope-o"></i>
             Contact
           </a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-if="!loggedIn"><a ng-click="openLogin()">
+          <span class="glyphicon glyphicon-log-in"></span> Login</a>
+        </li>
+        <li ng-if="loggedIn">
+          <a>{{username}}</a>
+        </li>
+        <li ng-if="loggedIn">
+          <a ng-click="logOut()">
+        <span class="glyphicon glyphicon-log-in"></span> Logout</a>
         </li>
       </ul>
     </div>

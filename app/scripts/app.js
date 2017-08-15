@@ -1,7 +1,6 @@
 'use strict';
 
-
-angular.module('confusionApp', ['ui.router', 'ngResource'])
+angular.module('confusionApp', ['ui.router', 'ngResource', 'ngDialog'])
   .config(['$locationProvider', function($locationProvider) {
     $locationProvider.hashPrefix('');
   }])
@@ -13,10 +12,12 @@ angular.module('confusionApp', ['ui.router', 'ngResource'])
         url:'/',
         views: {
           'header': {
-            templateUrl: 'views/header.html'
+            templateUrl: 'views/header.html',
+            controller  : 'HeaderController'
           },
           'content': {
-            templateUrl: 'views/home.html'
+            templateUrl: 'views/home.html',
+            controller  : 'HomeController'
           },
           'footer': {
             templateUrl: 'views/footer.html'
@@ -29,7 +30,8 @@ angular.module('confusionApp', ['ui.router', 'ngResource'])
         url:'aboutus',
         views: {
           'content@': {
-            templateUrl : 'views/aboutus.html'
+            templateUrl : 'views/aboutus.html',
+            controller  : 'AboutController'
           }
         }
       })
@@ -39,7 +41,8 @@ angular.module('confusionApp', ['ui.router', 'ngResource'])
         url:'contactus',
         views: {
           'content@': {
-            templateUrl : 'views/contactus.html'
+            templateUrl : 'views/contactus.html',
+            controller  : 'ContactController'
           }
         }
       })
@@ -49,7 +52,8 @@ angular.module('confusionApp', ['ui.router', 'ngResource'])
         url: 'menu',
         views: {
           'content@': {
-            templateUrl : 'views/menu.html'
+            templateUrl : 'views/menu.html',
+            controller  : 'MenuController'
           }
         }
       })
@@ -59,7 +63,19 @@ angular.module('confusionApp', ['ui.router', 'ngResource'])
         url: 'menu/:id',
         views: {
           'content@': {
-            templateUrl : 'views/dishdetail.html'
+            templateUrl : 'views/dishdetail.html',
+            controller  : 'DishDetailController'
+          }
+        }
+      })
+
+      // route for the dishdetail page
+      .state('app.favorites', {
+        url: 'favorites',
+        views: {
+          'content@': {
+            templateUrl : 'views/favorites.html',
+            controller  : 'FavoriteController'
           }
         }
       });
