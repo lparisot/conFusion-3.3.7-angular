@@ -170,7 +170,6 @@ angular.module('confusionApp')
 
   .controller('FavoriteController', ['$scope', '$state', 'favoriteFactory',
     function ($scope, $state, favoriteFactory) {
-      $scope.tab = 1;
       $scope.filtText = '';
       $scope.showDetails = false;
       $scope.showDelete = false;
@@ -186,6 +185,8 @@ angular.module('confusionApp')
           $scope.message = "Error: " + response.status + " " + response.statusText;
         });
 
+      // menus tab selector
+      $scope.tab = 1;
       $scope.select = function (setTab) {
         $scope.tab = setTab;
 
@@ -199,7 +200,6 @@ angular.module('confusionApp')
           $scope.filterText = "";
         }
       };
-
       $scope.isSelected = function (checkTab) {
         return ($scope.tab === checkTab);
       };
