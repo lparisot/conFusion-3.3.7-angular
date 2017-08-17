@@ -56,7 +56,7 @@ angular.module('confusionApp')
           }
         );
       $scope.promotion = {};
-      menuFactory.query({featured: "true"})
+      promotionFactory.query({featured: "true"})
         .$promise.then(
           function(response) {
             $scope.promotion = response[0];
@@ -232,7 +232,7 @@ angular.module('confusionApp')
       $scope.invalidChannelSelection = false;
 
       $scope.sendFeedback = function () {
-        if ($scope.feedback.agree && ($scope.feedback.mychannel == "")) {
+        if ($scope.feedback.agree && ($scope.feedback.mychannel === "")) {
           $scope.invalidChannelSelection = true;
         } else {
           $scope.invalidChannelSelection = false;

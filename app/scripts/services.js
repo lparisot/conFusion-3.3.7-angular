@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('confusionApp')
-  .constant("baseURL","http://localhost:3443/")
+  .constant("baseURL","https://localhost:3443/")
 
   .factory('menuFactory', ['$resource', 'baseURL', function($resource, baseURL) {
     return $resource(baseURL + "dishes/:id", null, {'update': {method: 'PUT'}});
@@ -44,7 +44,7 @@ angular.module('confusionApp')
       getObject: function (key, defaultValue) {
         return JSON.parse(this.get(key, defaultValue));
       }
-    }
+    };
   }])
 
   .factory('AuthFactory', ['$resource', '$http', '$localStorage', '$rootScope', '$window', 'baseURL', 'ngDialog',
@@ -55,18 +55,6 @@ angular.module('confusionApp')
       var username = '';
       var authToken = undefined;
 
-      function loadUserCredentials() {
-        var credentials = $localStorage.getObject(TOKEN_KEY, '{}');
-        if (credentials.username != undefined) {
-          useCredentials(credentials);
-        }
-      }
-
-      function storeUserCredentials(credentials) {
-        $localStorage.storeObject(TOKEN_KEY, credentials);
-        useCredentials(credentials);
-      }
-
       function useCredentials(credentials) {
         isAuthenticated = true;
         username = credentials.username;
@@ -74,6 +62,18 @@ angular.module('confusionApp')
 
         // Set the token as header for next requests!
         $http.defaults.headers.common['x-access-token'] = authToken;
+      }
+
+      function loadUserCredentials() {
+        var credentials = $localStorage.getObject(TOKEN_KEY, '{}');
+        if (credentials.username !== undefined) {
+          useCredentials(credentials);
+        }
+      }
+
+      function storeUserCredentials(credentials) {
+        $localStorage.storeObject(TOKEN_KEY, credentials);
+        useCredentials(credentials);
       }
 
       function destroyUserCredentials() {
@@ -106,13 +106,13 @@ angular.module('confusionApp')
       };
 
       authFac.logout = function() {
-        $resource(baseURL + "users/logout").get(function(response) {});
+        $resource(baseURL + "users/logout").get(function() {});
         destroyUserCredentials();
       };
 
       authFac.register = function(registerData) {
         $resource(baseURL + "users/register")
-          .save(registerData, function(response) {
+          .save(registerData, function() {
             authFac.login({username: registerData.username, password: registerData.password});
             if (registerData.rememberMe) {
               $localStorage.storeObject('userinfo', {username: registerData.username, password: registerData.password});
