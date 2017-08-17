@@ -19,6 +19,7 @@ angular.module('confusionApp')
         AuthFactory.logout();
         $scope.loggedIn = false;
         $scope.username = '';
+        $state.go('app', {}, {reload: true});
       };
 
       $rootScope.$on('login:Successful', function () {
@@ -214,9 +215,10 @@ angular.module('confusionApp')
 
       $scope.deleteFavorite = function(dishid) {
         console.log('Delete favorites', dishid);
-        favoriteFactory.delete({id: dishid});
-        $scope.showDelete = !$scope.showDelete;
-        $state.go($state.current, {}, {reload: true});
+        favoriteFactory.delete({id: dishid}).$promise.then(function() {
+          $scope.showDelete = !$scope.showDelete;
+          $state.go($state.current, {}, {reload: true});
+        });
       };
     }
   ])
@@ -251,8 +253,8 @@ angular.module('confusionApp')
     }
   ])
 
-  .controller('LoginController', ['$scope', 'ngDialog', '$localStorage', 'AuthFactory',
-    function ($scope, ngDialog, $localStorage, AuthFactory) {
+  .controller('LoginController', ['$scope', 'ngDialog', '$localStorage', '$state', 'AuthFactory',
+    function ($scope, ngDialog, $localStorage, $state, AuthFactory) {
       $scope.loginData = $localStorage.getObject('userinfo', '{}');
 
       $scope.doLogin = function() {
@@ -263,6 +265,8 @@ angular.module('confusionApp')
         AuthFactory.login($scope.loginData);
 
         ngDialog.close();
+
+        $state.go('app', {}, {reload: true});
       };
 
       $scope.openRegister = function () {
