@@ -161,10 +161,11 @@ angular.module('confusionApp')
       $scope.ratings = [1, 2, 3, 4, 5];
 
       $scope.submitComment = function () {
-        commentFactory.save({id: $stateParams.id}, $scope.mycomment);
-        $state.go($state.current, {}, {reload: true});
-        $scope.commentForm.$setPristine();
-        $scope.mycomment = {rating: 5, comment: ""};
+        commentFactory.save({id: $stateParams.id}, $scope.mycomment).$promise.then(function() {
+          $state.go($state.current, {}, {reload: true});
+          $scope.commentForm.$setPristine();
+          $scope.mycomment = {rating: 5, comment: ""};
+        });
       };
     }
   ])

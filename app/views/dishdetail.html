@@ -52,7 +52,7 @@
             <blockquote>
               <h4>{{comment.rating}} Stars</h4>
               <p>{{comment.comment}}</p>
-              <footer>{{comment.author}}, {{comment.date | date : 'mediumDate' }}</footer>
+              <footer>{{comment.postedBy.firstname}} {{comment.postedBy.lastname}}, {{comment.updatedAt | date : 'mediumDate' }}</footer>
             </blockquote>
           </li>
         </ul>
@@ -65,7 +65,7 @@
           <blockquote>
             <h4>{{mycomment.rating}} Stars</h4>
             <p>{{mycomment.comment}}</p>
-            <footer>{{mycomment.author}}, {{mycomment.date | date : 'mediumDate' }}</footer>
+            <footer>{{comment.postedBy.firstname}} {{comment.postedBy.lastname}}, {{comment.updatedAt | date : 'mediumDate' }}</footer>
           </blockquote>
         </li>
       </ul>
@@ -75,7 +75,7 @@
           <label for="rating" class="col-sm-2 control-label">Number of Stars</label>
           <div class="col-sm-10">
             <label class="radio-inline" ng-repeat="n in ratings">
-              <input type="radio" name="rating" id="rating" ng-model="comment.rating" ng-value="n">{{n}}
+              <input type="radio" name="rating" id="rating" ng-model="mycomment.rating" ng-value="n">{{n}}
             </label>
           </div>
         </div>
@@ -83,7 +83,7 @@
         <div class="form-group" ng-class="{ 'has-error' : commentForm.comment.$error.required && commentForm.comment.$dirty }">
           <label for="comment" class="col-sm-2 control-label">Your Comments</label>
           <div class="col-sm-10">
-            <textarea class="form-control" id="comment" name="comment" rows="10" ng-model="comment.comment" required></textarea>
+            <textarea class="form-control" id="comment" name="comment" rows="10" ng-model="mycomment.comment" required></textarea>
             <span ng-show="commentForm.comment.$error.required && commentForm.comment.$dirty" class="help-block">
               Your comments are required.
             </span>

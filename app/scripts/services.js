@@ -8,7 +8,7 @@ angular.module('confusionApp')
   }])
 
   .factory('commentFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
-    return $resource(baseURL + "dishes/:id/comments/:commentId", {id:"@Id", commentId: "@CommentId"}, {'update': {method: 'PUT'}});
+    return $resource(baseURL + "dishes/:id/comments/:commentId", {id:"@id", commentId: "@commentId"}, {'update': {method: 'PUT'}});
   }])
 
   .factory('promotionFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
